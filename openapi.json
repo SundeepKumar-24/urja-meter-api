@@ -1,0 +1,169 @@
+
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Urja Meter Operations API",
+    "version": "1.0.0",
+    "description": "A REST API wrapper around the legacy Urja Meter Ops portal. It exposes meter search, transformer listing, energy readings, and geographic details."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:5000",
+      "description": "Local development server"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Check API health",
+        "responses": {
+          "200": {
+            "description": "API is running"
+          }
+        }
+      }
+    },
+    "/api/v1/meters": {
+      "get": {
+        "summary": "Search and list meters",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search query passed to the portal."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "description": "One-based page number."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Meter search results returned by the portal."
+          },
+          "400": {
+            "description": "Invalid page parameter."
+          },
+          "502": {
+            "description": "Portal request failed."
+          },
+          "503": {
+            "description": "Portal endpoint is not configured."
+          },
+          "504": {
+            "description": "Portal request timed out."
+          }
+        }
+      }
+    },
+    "/api/v1/transformers": {
+      "get": {
+        "summary": "List distribution transformers",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transformer results returned by the portal."
+          },
+          "502": {
+            "description": "Portal request failed."
+          },
+          "503": {
+            "description": "Portal endpoint is not configured."
+          },
+          "504": {
+            "description": "Portal request timed out."
+          },
+          "400": {
+            "description": "Invalid page parameter."
+          }
+        }
+      }
+    },
+    "/api/v1/meters/{meter_id}/energy": {
+      "get": {
+        "summary": "Get energy readings for a meter",
+        "parameters": [
+          {
+            "name": "meter_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Meter energy readings returned by the portal."
+          },
+          "404": {
+            "description": "Meter not found."
+          },
+          "502": {
+            "description": "Portal request failed."
+          },
+          "503": {
+            "description": "Portal endpoint is not configured."
+          },
+          "504": {
+            "description": "Portal request timed out."
+          }
+        }
+      }
+    },
+    "/api/v1/meters/{meter_id}/geo": {
+      "get": {
+        "summary": "Get geographic details for a meter",
+        "parameters": [
+          {
+            "name": "meter_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Meter coordinates returned by the portal."
+          },
+          "404": {
+            "description": "Meter not found."
+          },
+          "502": {
+            "description": "Portal request failed."
+          },
+          "503": {
+            "description": "Portal endpoint is not configured."
+          },
+          "504": {
+            "description": "Portal request timed out."
+          }
+        }
+      }
+    }
+  }
+}
