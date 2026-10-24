@@ -23,10 +23,8 @@ A Flask REST API wrapper for the legacy Urja Meter Ops portal. It exposes endpoi
 
 ### 1. Clone the repository
 
-```powershell
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/SundeepKumar-24/urja-meter-api.git
 cd urja-meter-api
-```
 
 Replace `YOUR_GITHUB_REPOSITORY_URL` with your repository URL.
 
@@ -142,8 +140,9 @@ The test suite uses mocked portal responses and does not require a live portal s
 
 ## Documentation
 
-- `openapi.json` — OpenAPI specification
-- `PROTOCOL.md` — Observed legacy portal behavior, authentication, assumptions, and limitations
+[API Specification](openapi.json) — OpenAPI 3.x specification for the Flask API.
+[Portal Protocol Notes](PROTOCOL.md) — Observed portal endpoints, authentication, data formats, and limitations.
+[Reflection](Reflection.md) — Assumptions, challenges, mistakes, and future improvements.
 
 ## Limitations
 
